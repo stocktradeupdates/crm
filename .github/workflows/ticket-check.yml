@@ -11,14 +11,12 @@ jobs:
     steps:
       - name: Check PR for ticket number
         run: |
-          echo "PR Title: Update Readme.txt"
-          echo "PR Body: TICKET-123"
+          echo "PR Title: ${{ github.event.pull_request.title }}"
+          echo "PR Body: ${{ github.event.pull_request.body }}"
 
-          if [[ ! "Update Readme.txt" =~ TICKET-[0-9]+ ]] && [[ ! "TICKET-123" =~ TICKET-[0-9]+ ]]; then
+          if [[ ! "${{ github.event.pull_request.title }}" =~ TICKET-[0-9]+ ]] && [[ ! "${{ github.event.pull_request.body }}" =~ TICKET-[0-9]+ ]]; then
             echo "Error: No ticket number found in the PR title or description."
             exit 1
           else
             echo "Ticket number found. PR is valid."
           fi
-
-
