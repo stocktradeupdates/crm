@@ -1,21 +1,21 @@
 name: Ticket Number Check
 
-    on:
-      pull_request:
-        types: [opened, edited]
+on:
+  pull_request:
+    types: [opened, edited]
 
-    jobs:
-      check-ticket:
-        runs-on: ubuntu-latest
+jobs:
+  check-ticket:
+    runs-on: ubuntu-latest
 
-        steps:
-          - name: Check PR for ticket number
-            run: |
-              echo "PR Title: ${{ github.event.pull_request.title }}"
-              echo "PR Body: ${{ github.event.pull_request.body }}"
+    steps:
+      - name: Check PR for ticket number
+        run: |
+          echo "PR Title: ${{ github.event.pull_request.title }}"
+          echo "PR Body: ${{ github.event.pull_request.body }}"
 
-              if [[ ! "${{ github.event.pull_request.title }}" =~ [TICKET-[0-9]+] ]] && [[ ! "${{ github.event.pull_request.body }}" =~ [TICKET-[0-9]+] ]]; then
-                echo "Error: No ticket number found in the PR title or description."
-                exit 1
-              else
-                echo "Ticket number found. PR is valid."
+          if [[ ! "${{ github.event.pull_request.title }}" =~ TICKET-[0-9]+ ]] && [[ ! "${{ github.event.pull_request.body }}" =~ TICKET-[0-9]+ ]]; then
+            echo "Error: No ticket number found in the PR title or description."
+            exit 1
+          else
+            echo "Ticket number found. PR is valid."
