@@ -1,4 +1,4 @@
-name: Ticket Number Check
+name: JIRA Ticket Number Check
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check PR for ticket number
+      - name: Check PR for JIRA ticket number
         run: |
           echo "PR Title: ${{ github.event.pull_request.title }}"
           echo "PR Body: ${{ github.event.pull_request.body }}"
